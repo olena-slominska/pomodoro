@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-color="coral">
+<html lang="en" >
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="css/style.css" />
     <title>Pomodoro app</title>
   </head>
-  <body class="root">
+  <body>
     <header>
       <div class="logo-container">
         <img src="assets/logo.svg" alt="pomodoro logo" class="logo" />
@@ -51,6 +51,14 @@
         <div class="outercircle">
           <div class="middlecircle">
             <div class="innercircle">
+              <svg class="progress-ring">
+                <circle
+                  class="progressRing-circle"
+                  cx="50%"
+                  cy="50%"
+                  r="160"
+                ></circle>
+              </svg>
               <time class="timer-stopwatch">00:00</time>
 
               <button class="button-action">
@@ -86,7 +94,9 @@
             <h4 class="settings-title">Time (minutes)</h4>
             <div class="timeInput-wrapper">
               <div class="input-container">
-                <p class="input-details">pomodoro</p>
+                <label class="input-details" for="pomodoro-period"
+                  >pomodoro</label
+                >
                 <div class="inputField-container">
                   <input
                     id="pomodoro-period"
@@ -103,7 +113,7 @@
               </div>
 
               <div class="input-container">
-                <p class="input-details">short break</p>
+                <label class="input-details">short break</label>
                 <div class="inputField-container">
                   <input
                     id="short-period"
@@ -120,7 +130,7 @@
               </div>
 
               <div class="input-container">
-                <p class="input-details">long break</p>
+                <label class="input-details">long break</label>
                 <div class="inputField-container">
                   <input
                     id="long-period"
@@ -161,7 +171,7 @@
                 class="color-radio"
                 checked
               />
-              <input type="radio" name="color" id="cyan" class="color-radio"/>
+              <input type="radio" name="color" id="cyan" class="color-radio" />
               <input
                 type="radio"
                 name="color"

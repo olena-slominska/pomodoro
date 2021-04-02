@@ -1,4 +1,4 @@
-//TODOimplement localStorage to fonts, time period settings and colors
+//TODOimplement arrows (stepDown()/stepUp()), localStorage to fonts, time period settings and colors, adaptiveness
 
 const pomodoroButton = document.getElementById("pomodoro");
 const shortBreakButton = document.getElementById("shortBreak");
@@ -14,10 +14,13 @@ const timeModeSet = document.querySelectorAll(".timer-button");
 const pomodoroPeriod = document.getElementById("pomodoro-period");
 const shortPeriod = document.getElementById("short-period");
 const longPeriod = document.getElementById("long-period");
-let startTime = 0;
-let elapsedTime = 0;
-let timerInterval;
-let endTime = 0;
+let startTime = 0,
+  percent = 0,
+  elapsedTime = 0,
+  endTime = 0,
+  timerInterval;
+
+applySettings();
 
 pomodoroButton.addEventListener("click", handleStartButton);
 shortBreakButton.addEventListener("click", handleStartButton);
@@ -51,7 +54,7 @@ function applySettings() {
 }
 
 function changeColor(colorTheme) {
-  document.documentElement.setAttribute("data-color", colorTheme || "coral");
+  document.documentElement.setAttribute("data-color", colorTheme);
 }
 function changeFont(font) {
   document.querySelector(".main").style.fontFamily = `${font}`;
@@ -61,15 +64,15 @@ function setEndTime(pomodoroChoice, shortBreakChoice, longBreakChoice) {
     (timeBtn) => timeBtn.checked === true
   )[0].id;
   const timeModes = {
-    'pomodoro': pomodoroChoice,
-    'shortBreak': shortBreakChoice,
-    'longBreak': longBreakChoice
-  }
+    pomodoro: pomodoroChoice,
+    shortBreak: shortBreakChoice,
+    longBreak: longBreakChoice,
+  };
   const timeTemp = timeModes[timeModeId];
-  endTime = parseInt(timeTemp)*60000;
+  endTime = parseInt(timeTemp) * 60000;
 }
 
-function handleStartButton(e) {
+function handleStartButton() {
   reset();
   applySettings();
   restartButton.classList.remove("active-action");
@@ -95,9 +98,12 @@ function start() {
   startTime = Date.now() - elapsedTime;
   timerInterval = setInterval(() => {
     elapsedTime = Date.now() - startTime;
+    percent = (elapsedTime / endTime) * 100;
+    setProgress(percent);
     if (elapsedTime >= endTime) {
       elapsedTime = endTime;
-      stop();
+      pause();
+      reset();
     }
     print(timeToString(elapsedTime));
   }, 1000);
@@ -113,7 +119,9 @@ function reset() {
   clearInterval(timerInterval);
   print("00:00");
   elapsedTime = 0;
-  showButton("RESTART");
+  percent = 0;
+  setProgress(0);
+  showButton("PAUSE");
 }
 function showButton(buttonKey) {
   const buttonToShow = buttonKey === "RESTART" ? restartButton : pauseButton;
@@ -122,6 +130,20 @@ function showButton(buttonKey) {
   buttonToHide.style.display = "none";
 }
 
+//circular progress bar:
+const circle = document.querySelector(".progressRing-circle");
+const radius = circle.r.baseVal.value;
+const circumference = 2 * Math.PI * radius;
+
+circle.style.strokeDasharray = ` ${circumference} ${circumference}`;
+circle.style.strokeDashoffset = circumference;
+
+function setProgress(percent) {
+  const offset = circumference * (1 - percent / 100);
+  circle.style.strokeDashoffset = offset;
+}
+
+//popup with settings:
 const openEl = document.querySelector("[data-open]");
 const closeEl = document.querySelector("[data-close]");
 openEl.addEventListener("click", () => {

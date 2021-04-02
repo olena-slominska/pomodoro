@@ -1,7 +1,7 @@
 html {
   --bkground: #1e213f;
   --btnGroup-bkcolor: #161932;
-  --oval-color: linear-gradient(#2e325a, #0e112a);
+  --oval-color: linear-gradient(#0e112a, #2e325a);
   --ovalCopy-color: #161932;
   --light-gray: #d7e0ff;
   --blackish: #161932;
@@ -15,22 +15,22 @@ html {
   --font1: "Kumbh Sans", sans-serif;
   --font2: "Space Mono", monospace;
   --font3: "Roboto Slab", serif;
-  
-  --btn-active: #1e213f;
 
+  --btn-active: #1e213f;
 }
-html[data-color='coral'] {
- --bgBtn-active: var(--coral);
- --innerCircle-color: var(--coral);
+html[data-color="coral"] {
+  --bgBtn-active: var(--coral);
+  --innerCircle-color: var(--coral);
 }
-html[data-color='cyan'] {
+html[data-color="cyan"] {
   --bgBtn-active: var(--cyan);
   --innerCircle-color: var(--cyan);
- }
- html[data-color='purple'] {
+}
+html[data-color="purple"] {
   --bgBtn-active: var(--purple);
   --innerCircle-color: var(--purple);
- }
+}
+
 html {
   width: 100%;
   height: 100vh;
@@ -68,7 +68,6 @@ main {
 .start-btn-group {
   width: 22rem;
   height: 3.9rem;
-  /* line-height: 4rem; */
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -109,20 +108,20 @@ input[name="timer-mode"]:checked {
 }
 .outercircle {
   margin-top: 2rem;
-  width: 410px;
-  height: 410px;
+  width: 25.6rem;
+  height: 25.6rem;
   background: var(--oval-color);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  filter: drop-shadow(-3rem -3rem 6rem #272c5a)
-    drop-shadow(3rem 3rem 6rem #121530);
+  filter: drop-shadow(3rem 3rem 6rem #121530)
+    drop-shadow(-3rem -3rem 6rem #272c5a);
 }
 
 .middlecircle {
-  width: 366px;
-  height: 366px;
+  width: 22.875rem;
+  height: 22.875rem;
   background: var(--ovalCopy-color);
   border-radius: 50%;
   display: flex;
@@ -130,30 +129,42 @@ input[name="timer-mode"]:checked {
   justify-content: center;
 }
 .innercircle {
-  width: 339px;
-  height: 339px;
-  background-color: transparent;
-  border: 11px solid var(--innerCircle-color);
+  width: 21.2rem;
+  height: 21.2rem;
   border-radius: 50%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
   position: relative;
 }
+.progress-ring {
+  position: absolute;
+  background: transparent;
+  width: 100%;
+  height: 100%;
+}
+.progressRing-circle {
+  fill: none;
+  stroke-width: 11px;
+  stroke-linecap: round;
+  stroke: var(--innerCircle-color);
+  transform-origin: center;
+  transform: rotate(-90deg);
+}
 .timer-stopwatch {
-  /* letter-spacing: .5rem; */
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   width: 15.75rem;
   height: 6.3rem;
   color: var(--light-gray);
   font-size: 5rem;
- 
   font-weight: bold;
+  text-align: center;
 }
 .button-action {
   position: absolute;
   top: 65%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   color: var(--light-gray);
   letter-spacing: 1em;
   text-transform: uppercase;
@@ -163,6 +174,7 @@ input[name="timer-mode"]:checked {
   width: 11rem;
   height: 1.5rem;
   margin-top: 1rem;
+  text-align: center;
 }
 .button-action span {
   display: none;
@@ -175,7 +187,6 @@ input[name="timer-mode"]:checked {
   justify-content: center;
   align-items: center;
   text-align: center;
-  
 }
 .kumbh {
   font-family: "Kumbh Sans", sans-serif;
@@ -206,7 +217,7 @@ input[name="timer-mode"]:checked {
   opacity: 0;
   transition: all 0.2s ease-in;
   cursor: pointer;
-  z-index: 3;
+  z-index: 6;
 }
 
 .modal.is-visible {
@@ -301,6 +312,11 @@ input[name="timer-mode"]:checked {
 .input-container {
   width: 33%;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: left;
 }
 .inputField-container {
   height: 50%;
@@ -319,14 +335,13 @@ input[name="timer-mode"]:checked {
 }
 .arrow-up {
   background-image: url("../assets/icon-arrow-up.svg");
-  z-index: 10;
+  z-index: 6;
 }
 input[type="number"] {
   width: 100%;
   height: 3rem;
   border-radius: 5px;
   background-color: var(--gray-settings);
-  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
   font-size: 0.875rem;
   padding: 0.5rem;
 
@@ -341,6 +356,7 @@ input::-webkit-inner-spin-button {
 }
 
 .input-details {
+  text-align: left;
   font-size: 0.75rem;
   color: var(--input-details);
   margin: 1.5em 0;
@@ -352,12 +368,12 @@ input::-webkit-inner-spin-button {
   justify-content: space-between;
   align-items: center;
 }
-.color-radio, .font-radio {
+.color-radio,
+.font-radio {
   border-radius: 50%;
   width: 2.5rem;
   height: 2.5rem;
   line-height: 1;
-  
 }
 
 input[type="radio"] {
