@@ -10,12 +10,14 @@ const applyBtn = document.querySelector(".apply-btn");
 const stopwatch = document.querySelector(".timer-stopwatch");
 const colorSet = document.querySelectorAll(".color-radio");
 const fontSet = document.querySelectorAll(".font-radio");
+const timeModeSet = document.querySelectorAll(".timer-button");
 const pomodoroPeriod = document.getElementById("pomodoro-period");
 const shortPeriod = document.getElementById("short-period");
 const longPeriod = document.getElementById("long-period");
-let startTime;
+let startTime = 0;
 let elapsedTime = 0;
 let timerInterval;
+let endTime = 0;
 
 pomodoroButton.addEventListener("click", handleStartButton);
 shortBreakButton.addEventListener("click", handleStartButton);
@@ -45,7 +47,7 @@ function applySettings() {
   const font = fonts[fontChoice];
   changeColor(colorChoice);
   changeFont(font);
-  // setEndTime(pomodoroChoice, shortBreakChoice, longBreakChoice);
+  setEndTime(pomodoroChoice, shortBreakChoice, longBreakChoice);
 }
 
 function changeColor(colorTheme) {
@@ -54,14 +56,22 @@ function changeColor(colorTheme) {
 function changeFont(font) {
   document.querySelector(".main").style.fontFamily = `${font}`;
 }
-// setEndTime(pomodoroChoice, shortBreakChoice, longBreakChoice) {
-
-// }
+function setEndTime(pomodoroChoice, shortBreakChoice, longBreakChoice) {
+  const timeModeId = [...timeModeSet].filter(
+    (timeBtn) => timeBtn.checked === true
+  )[0].id;
+  const timeModes = {
+    'pomodoro': pomodoroChoice,
+    'shortBreak': shortBreakChoice,
+    'longBreak': longBreakChoice
+  }
+  const timeTemp = timeModes[timeModeId];
+  endTime = parseInt(timeTemp)*60000;
+}
 
 function handleStartButton(e) {
   reset();
   applySettings();
-
   restartButton.classList.remove("active-action");
   pauseButton.classList.add("active-action");
   start();
@@ -74,7 +84,6 @@ function timeToString(time) {
   let ss = Math.floor(diffInSec);
   let formattedMM = mm.toString().padStart(2, "0");
   let formattedSS = ss.toString().padStart(2, "0");
-
   return `${formattedMM}:${formattedSS}`;
 }
 
@@ -86,11 +95,10 @@ function start() {
   startTime = Date.now() - elapsedTime;
   timerInterval = setInterval(() => {
     elapsedTime = Date.now() - startTime;
-    //TODO check correctness:
-    // if (elapsedTime >= endTime) {
-    //   elapsedTime = endTime;
-    //   stop();
-    // }
+    if (elapsedTime >= endTime) {
+      elapsedTime = endTime;
+      stop();
+    }
     print(timeToString(elapsedTime));
   }, 1000);
   showButton("PAUSE");
