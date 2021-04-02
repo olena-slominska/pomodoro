@@ -4,7 +4,9 @@
 *::after {
   box-sizing: border-box;
 }
-
+body {
+  overflow: hidden;
+}
 /* Remove default margin */
 body,
 h1,
@@ -16,7 +18,7 @@ figure,
 blockquote,
 button,
 dl,
-dd {
+dd, fieldset, input {
   margin: 0;
   padding: 0;
   border: none;
