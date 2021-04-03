@@ -1,4 +1,4 @@
-//TODOimplement arrows (stepDown()/stepUp()), localStorage to fonts, time period settings and colors, adaptiveness
+//TODOimplement arrows (stepDown()/stepUp()), localStorage to time period settings, adaptiveness, custom pointer cursor
 
 const pomodoroButton = document.getElementById("pomodoro");
 const shortBreakButton = document.getElementById("shortBreak");
@@ -6,6 +6,8 @@ const longBreakButton = document.getElementById("longBreak");
 const pauseButton = document.querySelector(".pause-button");
 const restartButton = document.querySelector(".restart-button");
 const applyBtn = document.querySelector(".apply-btn");
+const arrowDown = document.querySelector('.arrow-down');
+const arrowUp = document.querySelector('.arrow-up');
 
 const stopwatch = document.querySelector(".timer-stopwatch");
 const colorSet = document.querySelectorAll(".color-radio");
@@ -157,3 +159,6 @@ document.addEventListener("click", (e) => {
     document.querySelector(".modal.is-visible").classList.remove("is-visible");
   }
 });
+
+//increment/decrement in number inputs:
+arrowDown.stepDown(1);
