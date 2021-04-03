@@ -1,6 +1,6 @@
 html {
   --bkground: #1e213f;
-  --oval-color: linear-gradient(#0e112a, #2e325a);
+  --oval-color: linear-gradient(to bottom right, #0e112a, #2e325a);
   --light-gray: #d7e0ff;
   --blackish: #161932;
   --coral: #f87070;
@@ -43,11 +43,13 @@ body {
   font-family: "Kumbh Sans", sans-serif;
 }
 header {
+  width: 100%;
   height: 8vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 1em 0;
+  margin: 1rem 0 0 0;
+  z-index: 2;
 }
 .logo-container {
   cursor: pointer;
@@ -56,10 +58,10 @@ header {
 main {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  width: 25.6rem;
-  height: 25.6rem;
+  width: 100%;
+  height: 85vh;
 }
 .start-btn-group {
   width: 22rem;
@@ -99,20 +101,24 @@ input[name="timer-mode"]:checked {
 }
 
 .timer-container {
-  width: 410px;
-  height: 410px;
+  margin-top: 2rem;
+  width: 25.625rem;
+  height: 25.625rem;
+  border-radius: 50%;
+  filter: drop-shadow(3rem 3rem 6rem  #121530)
+  drop-shadow(-3rem -3rem 6rem #272c5a);
+
 }
 .outercircle {
-  margin-top: 2rem;
   width: 25.6rem;
   height: 25.6rem;
-  background-color: var(--oval-color);
+  background-image: var(--oval-color);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  filter: drop-shadow(3rem 3rem 6rem #121530)
-    drop-shadow(-3rem -3rem 6rem #272c5a);
+  filter: drop-shadow(3rem 3rem 6rem  #121530)
+  drop-shadow(-3rem -3rem 6rem #272c5a);
 }
 
 .middlecircle {
@@ -165,6 +171,7 @@ input[name="timer-mode"]:checked {
   letter-spacing: 1em;
   text-transform: uppercase;
   font-weight: bold;
+  font-size: 1rem;
   cursor: pointer;
   line-height: 1.5;
   width: 11rem;
@@ -183,7 +190,6 @@ input[name="timer-mode"]:checked {
   display: flex;
   justify-content: center;
   align-items: center;
-  text-align: center;
 }
 .kumbh {
   font-family: "Kumbh Sans", sans-serif;
@@ -210,7 +216,7 @@ input[name="timer-mode"]:checked {
   align-items: center;
   justify-content: center;
   padding: 1rem;
-  background-color: rgba(30, 33, 63, 0.5);
+  background-color: rgba(10, 12, 28, 0.5);
   visibility: hidden;
   opacity: 0;
   transition: all 0.2s ease-in;
@@ -296,14 +302,15 @@ input[name="timer-mode"]:checked {
 }
 .settings-title {
   text-transform: uppercase;
+  margin-bottom: 1rem;
 }
 
 .timeInput-wrapper {
   width: 100%;
   height: 4.68rem;
   display: flex;
-  flex-wrap: nowrap;
   align-items: center;
+  justify-content: center;
 }
 .input-container {
   width: 30%;
@@ -321,13 +328,11 @@ input[name="timer-mode"]:checked {
   height: 3rem;
   width: 100%;
   border-radius: 5px;
-
   position: relative;
 }
 .arrow-container {
   background-color: var(--gray-settings);
-
-  width: 32px;
+  width: 2rem;
   height: 3rem;
   display: flex;
   flex-direction: column;
@@ -364,7 +369,6 @@ input[type="number"] {
   font-size: 0.875rem;
   padding: 1rem;
   caret-color: var(--blackish);
-  -moz-appearance: textfield;
 }
 
 input::-webkit-outer-spin-button,
@@ -477,6 +481,12 @@ input[type="radio"]:hover {
 }
 
 footer {
-  position: absolute;
-  bottom: 1rem;
+  width: 100%;
+  height: 9vh;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  z-index: 2;
 }
+
+

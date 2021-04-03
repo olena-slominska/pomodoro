@@ -1,4 +1,4 @@
-//TODOimplement arrows (stepDown()/stepUp()), localStorage to time period settings, adaptiveness, custom pointer cursor
+//TODOimplement  localStorage to time period settings/color/font for Chrome, custom pointer cursor, arrows styles for tablets/phones
 
 const pomodoroButton = document.getElementById("pomodoro");
 const shortBreakButton = document.getElementById("shortBreak");
@@ -6,9 +6,7 @@ const longBreakButton = document.getElementById("longBreak");
 const pauseButton = document.querySelector(".pause-button");
 const restartButton = document.querySelector(".restart-button");
 const applyBtn = document.querySelector(".apply-btn");
-const arrowDown = document.querySelector('.arrow-down');
-const arrowUp = document.querySelector('.arrow-up');
-
+const timeSetting = document.querySelector(".time-setting");
 const stopwatch = document.querySelector(".timer-stopwatch");
 const colorSet = document.querySelectorAll(".color-radio");
 const fontSet = document.querySelectorAll(".font-radio");
@@ -27,12 +25,9 @@ applySettings();
 pomodoroButton.addEventListener("click", handleStartButton);
 shortBreakButton.addEventListener("click", handleStartButton);
 longBreakButton.addEventListener("click", handleStartButton);
-
 pauseButton.addEventListener("click", pause);
 restartButton.addEventListener("click", start);
-
 applyBtn.addEventListener("click", applySettings);
-
 function applySettings() {
   const colorChoice = [...colorSet].filter(
     (colorBtn) => colorBtn.checked === true
@@ -43,7 +38,6 @@ function applySettings() {
   const pomodoroChoice = pomodoroPeriod.value;
   const shortBreakChoice = shortPeriod.value;
   const longBreakChoice = longPeriod.value;
-
   const fonts = {
     font1: '"Kumbh Sans", sans-serif',
     font2: ' "Space Mono", monospace',
@@ -54,7 +48,6 @@ function applySettings() {
   changeFont(font);
   setEndTime(pomodoroChoice, shortBreakChoice, longBreakChoice);
 }
-
 function changeColor(colorTheme) {
   document.documentElement.setAttribute("data-color", colorTheme);
 }
@@ -73,7 +66,6 @@ function setEndTime(pomodoroChoice, shortBreakChoice, longBreakChoice) {
   const timeTemp = timeModes[timeModeId];
   endTime = parseInt(timeTemp) * 60000;
 }
-
 function handleStartButton() {
   reset();
   applySettings();
@@ -81,7 +73,6 @@ function handleStartButton() {
   pauseButton.classList.add("active-action");
   start();
 }
-
 function timeToString(time) {
   let diffInMin = time / 60000;
   let mm = Math.floor(diffInMin);
@@ -91,11 +82,9 @@ function timeToString(time) {
   let formattedSS = ss.toString().padStart(2, "0");
   return `${formattedMM}:${formattedSS}`;
 }
-
 function print(txt) {
   stopwatch.innerHTML = txt;
 }
-
 function start() {
   startTime = Date.now() - elapsedTime;
   timerInterval = setInterval(() => {
@@ -111,12 +100,10 @@ function start() {
   }, 1000);
   showButton("PAUSE");
 }
-
 function pause() {
   clearInterval(timerInterval);
   showButton("RESTART");
 }
-
 function reset() {
   clearInterval(timerInterval);
   print("00:00");
@@ -136,14 +123,22 @@ function showButton(buttonKey) {
 const circle = document.querySelector(".progressRing-circle");
 const radius = circle.r.baseVal.value;
 const circumference = 2 * Math.PI * radius;
-
 circle.style.strokeDasharray = ` ${circumference} ${circumference}`;
 circle.style.strokeDashoffset = circumference;
-
 function setProgress(percent) {
   const offset = circumference * (1 - percent / 100);
   circle.style.strokeDashoffset = offset;
 }
+
+//increment/decrement in number inputs:
+timeSetting.addEventListener("click", (e) => {
+  if (e.target.classList.contains("arrow-up")) {
+    e.target.parentElement.previousElementSibling.stepUp(1);
+  }
+  if (e.target.classList.contains("arrow-down")) {
+    e.target.parentElement.previousElementSibling.stepDown(1);
+  }
+});
 
 //popup with settings:
 const openEl = document.querySelector("[data-open]");
@@ -159,6 +154,3 @@ document.addEventListener("click", (e) => {
     document.querySelector(".modal.is-visible").classList.remove("is-visible");
   }
 });
-
-//increment/decrement in number inputs:
-arrowDown.stepDown(1);

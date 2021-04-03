@@ -1,0 +1,147 @@
+@media (min-width: 1024px) and (orientation: portrait) {
+    header {
+      height: 20vh;
+        }
+        main {
+      height: 55vh;
+      justify-content: space-evenly;
+        }
+        footer {
+          height: 25vh;
+        }
+        .start-btn-group {
+          margin-top: 0;
+        }
+        .timer-container {
+          margin-top: 5rem;
+        }
+        .modal-dialog {
+          height: 55vh;
+        }
+        header>*, main>*, footer>* {
+          transform: scale(1.4);
+        }
+  }
+  @media (max-width: 870px) and (orientation: portrait) {
+    header {
+      height: 20vh;
+        }
+        main {
+      height: 55vh;
+      justify-content: space-evenly;
+        }
+        footer {
+          height: 25vh;
+        }
+        input[type="radio"] {
+          cursor: pointer;
+        }
+        .start-btn-group {
+          margin-top: 2rem;
+        }
+        .timer-container {
+          margin-top: 6rem;
+        }
+        .modal-dialog {
+          height: 45vh;
+        }
+        .apply-btn:active{
+          transform: scale(.6);
+        }
+        .arrow-up:active  {
+          background-image: url("../assets/icon-arrow-up-hover.svg");
+        }
+        .arrow-down:active {
+          background-image: url("../assets/icon-arrow-down-hover.svg");
+        }
+  }
+  @media (max-width: 750px) and (orientation: portrait) {
+    header {
+      height: 20vh;
+        }
+        main {
+      height: 62vh;
+      justify-content: space-evenly;
+        }
+        footer {
+          height: 18vh;
+        }
+        input[type="radio"] {
+          cursor: pointer;
+        }
+    .timer-container {
+      width: 18.75rem;
+      height: 18.75rem;
+      margin-top: 2rem;
+    }
+    .outercircle {
+      width: 18.75rem;
+      height: 18.75rem;
+    }
+    .middlecircle {
+      width: 16.7375rem;
+      height: 16.7375rem;
+    }
+    .innercircle {
+      width: 15.5rem;
+      height: 15.5rem;
+    }
+  .progress-ring {
+  stroke-width: 9px;
+  }
+  .progressRing-circle {
+  r: 115px;
+  }
+  .timer-stopwatch {
+    font-size: 4rem;
+  }
+  
+    .modal-dialog {
+      width: 86%;
+      height: 86vh;
+      padding: 1rem;
+    }
+    .setting {
+      flex-direction: column;
+      justify-content: space-evenly;
+      
+    }
+    .time-setting {
+      height: 30vh;
+      padding: 1rem 0;
+    }
+    .settings-title {
+      margin-bottom: 1.5rem;
+    }
+    .timeInput-wrapper {
+      flex-direction: column;
+      justify-content: center;
+    }
+    .input-container {
+      width: 100%;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+    .input-container:not(:last-of-type) {
+      margin-right: 0;
+    }
+    input[type="number"] {
+      height: 2.5rem;
+      width: 100%;
+    }
+    .input-details {
+      width: 50%;
+    }
+    .arrow-container {
+      height: 2.5rem;
+    }
+    .apply-btn:active{
+      transform: scale(.6);
+    }
+    .arrow-up:active  {
+      background-image: url("../assets/icon-arrow-up-hover.svg");
+    }
+    .arrow-down:active {
+      background-image: url("../assets/icon-arrow-down-hover.svg");
+    }
+  }
