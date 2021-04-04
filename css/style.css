@@ -18,14 +18,17 @@ html {
 html[data-color="coral"] {
   --bgBtn-active: var(--coral);
   --innerCircle-color: var(--coral);
+  --buttonAction-hover: var(--coral);
 }
 html[data-color="cyan"] {
   --bgBtn-active: var(--cyan);
   --innerCircle-color: var(--cyan);
+  --buttonAction-hover: var(--cyan);
 }
 html[data-color="purple"] {
   --bgBtn-active: var(--purple);
   --innerCircle-color: var(--purple);
+  --buttonAction-hover: var(--purple);
 }
 
 html {
@@ -82,6 +85,9 @@ input[name="timer-mode"] {
   font-weight: 700;
   border-radius: 26.5px;
   font-size: 0.875rem;
+}
+input[name="timer-mode"]:hover {
+  color: var(--light-gray);
 }
 input[name="timer-mode"]:checked {
   color: var(--btn-active);
@@ -178,14 +184,15 @@ input[name="timer-mode"]:checked {
   height: 1.5rem;
   margin-top: 1rem;
 }
+.button-action:hover {
+  color: var(--buttonAction-hover);
+}
 .button-action span {
   display: none;
   width: 100%;
   text-align: center;
 }
-
-.restart-button.active-action,
-.pause-button.active-action {
+.button-action span.active-action{
   width: 100%;
   display: flex;
   justify-content: center;

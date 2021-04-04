@@ -1,10 +1,13 @@
-//TODOimplement  localStorage to time period settings/color/font for Chrome, custom pointer cursor, arrows styles for tablets/phones
+//TODOimplement  localStorage to time period settings/color/font for Chrome
 
 const pomodoroButton = document.getElementById("pomodoro");
 const shortBreakButton = document.getElementById("shortBreak");
 const longBreakButton = document.getElementById("longBreak");
+
+const startButton= document.querySelector('.start-button');
 const pauseButton = document.querySelector(".pause-button");
 const restartButton = document.querySelector(".restart-button");
+
 const applyBtn = document.querySelector(".apply-btn");
 const timeSetting = document.querySelector(".time-setting");
 const stopwatch = document.querySelector(".timer-stopwatch");
@@ -19,12 +22,15 @@ let startTime = 0,
   elapsedTime = 0,
   endTime = 0,
   timerInterval;
-
+showButton('START');
 applySettings();
 
-pomodoroButton.addEventListener("click", handleStartButton);
-shortBreakButton.addEventListener("click", handleStartButton);
-longBreakButton.addEventListener("click", handleStartButton);
+pomodoroButton.addEventListener("click", reset);
+shortBreakButton.addEventListener("click", reset);
+longBreakButton.addEventListener("click", reset);
+
+startButton.addEventListener('click', handleStartButton);
+
 pauseButton.addEventListener("click", pause);
 restartButton.addEventListener("click", start);
 applyBtn.addEventListener("click", applySettings);
@@ -69,8 +75,9 @@ function setEndTime(pomodoroChoice, shortBreakChoice, longBreakChoice) {
 function handleStartButton() {
   reset();
   applySettings();
-  restartButton.classList.remove("active-action");
-  pauseButton.classList.add("active-action");
+  // getTimeMode();
+  // showButton('PAUSE');
+ 
   start();
 }
 function timeToString(time) {
@@ -110,13 +117,26 @@ function reset() {
   elapsedTime = 0;
   percent = 0;
   setProgress(0);
-  showButton("PAUSE");
+  showButton("START");
 }
 function showButton(buttonKey) {
-  const buttonToShow = buttonKey === "RESTART" ? restartButton : pauseButton;
-  const buttonToHide = buttonKey === "RESTART" ? pauseButton : restartButton;
-  buttonToShow.style.display = "flex";
-  buttonToHide.style.display = "none";
+if (buttonKey === "START") {
+  startButton.classList.add('active-action');
+  restartButton.classList.remove("active-action");
+  pauseButton.classList.remove("active-action");
+} else if (buttonKey === "PAUSE") {
+  pauseButton.classList.add('active-action');
+  restartButton.classList.remove("active-action");
+  startButton.classList.remove("active-action");
+}else if (buttonKey === "RESTART") {
+  restartButton.classList.add('active-action');
+  startButton.classList.remove("active-action");
+  pauseButton.classList.remove("active-action");
+}
+
+   // restartButton.classList.remove("active-action");
+  // pauseButton.classList.add("active-action");
+
 }
 
 //circular progress bar:
