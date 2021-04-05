@@ -1,10 +1,9 @@
-//TODOimplement  localStorage to time period settings/color/font for Chrome
 
 const pomodoroButton = document.getElementById("pomodoro");
 const shortBreakButton = document.getElementById("shortBreak");
 const longBreakButton = document.getElementById("longBreak");
 
-const startButton= document.querySelector('.start-button');
+const startButton = document.querySelector(".start-button");
 const pauseButton = document.querySelector(".pause-button");
 const restartButton = document.querySelector(".restart-button");
 
@@ -22,19 +21,26 @@ let startTime = 0,
   elapsedTime = 0,
   endTime = 0,
   timerInterval;
-showButton('START');
+showButton("START");
 applySettings();
 
 pomodoroButton.addEventListener("click", reset);
 shortBreakButton.addEventListener("click", reset);
 longBreakButton.addEventListener("click", reset);
-
-startButton.addEventListener('click', handleStartButton);
-
+startButton.addEventListener("click", handleStartButton);
 pauseButton.addEventListener("click", pause);
 restartButton.addEventListener("click", start);
 applyBtn.addEventListener("click", applySettings);
 function applySettings() {
+  if (![...timeModeSet].some((timerBtn) => timerBtn.checked)) {
+    pomodoroButton.checked = true;
+  }
+  if (![...colorSet].some((colorBtn) => colorBtn.checked)) {
+    colorSet[0].checked = true;
+  }
+  if (![...fontSet].some((fontBtn) => fontBtn.checked)) {
+    fontSet[0].checked = true;
+  }
   const colorChoice = [...colorSet].filter(
     (colorBtn) => colorBtn.checked === true
   )[0].id;
@@ -75,9 +81,6 @@ function setEndTime(pomodoroChoice, shortBreakChoice, longBreakChoice) {
 function handleStartButton() {
   reset();
   applySettings();
-  // getTimeMode();
-  // showButton('PAUSE');
- 
   start();
 }
 function timeToString(time) {
@@ -120,23 +123,19 @@ function reset() {
   showButton("START");
 }
 function showButton(buttonKey) {
-if (buttonKey === "START") {
-  startButton.classList.add('active-action');
-  restartButton.classList.remove("active-action");
-  pauseButton.classList.remove("active-action");
-} else if (buttonKey === "PAUSE") {
-  pauseButton.classList.add('active-action');
-  restartButton.classList.remove("active-action");
-  startButton.classList.remove("active-action");
-}else if (buttonKey === "RESTART") {
-  restartButton.classList.add('active-action');
-  startButton.classList.remove("active-action");
-  pauseButton.classList.remove("active-action");
-}
-
-   // restartButton.classList.remove("active-action");
-  // pauseButton.classList.add("active-action");
-
+  if (buttonKey === "START") {
+    startButton.classList.add("active-action");
+    restartButton.classList.remove("active-action");
+    pauseButton.classList.remove("active-action");
+  } else if (buttonKey === "PAUSE") {
+    pauseButton.classList.add("active-action");
+    restartButton.classList.remove("active-action");
+    startButton.classList.remove("active-action");
+  } else if (buttonKey === "RESTART") {
+    restartButton.classList.add("active-action");
+    startButton.classList.remove("active-action");
+    pauseButton.classList.remove("active-action");
+  }
 }
 
 //circular progress bar:

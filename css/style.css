@@ -422,6 +422,7 @@ input[type="radio"]:hover {
 .font-radio:checked {
   background-color: var(--blackish);
   color: #fff;
+  background-color: var();
 }
 .font-radio {
   background-color: var(--gray-settings);
